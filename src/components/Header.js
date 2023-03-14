@@ -1,47 +1,43 @@
 import React from "react";
 import "./Header.css";
+import SearchIcon from "@mui/icons-material/Search";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 function Header() {
   return (
     <div className="header">
       <img
         className="header_logo"
-        src="https://imgs.search.brave.com/4hDq0N_lv2yAPLOcwRgqiLi_bWTZgXLiXloeZASeq9A/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9sb2dv/cy13b3JsZC5uZXQv/d3AtY29udGVudC91/cGxvYWRzLzIwMjAv/MDQvQW1hem9uLUxv/Z28ucG5n"
+        src="https://imgs.search.brave.com/ermYoNLzcBnu3cGzr1YuLPNZHMtoPDtWWwyPlubMcj0/rs:fit:1024:373:1/g:ce/aHR0cHM6Ly9qaXRz/dmluZ2VyLmNvLnph/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE4/LzA0L0FtYXpvbi1M/b2dvLTEwMjR4Mzcz/LnBuZw"
+        alt="amazon"
       />
 
       <div className="header_search">
         <input className="header_searchInput" type="text" />
+        <SearchIcon className="header_searchIcon" />
       </div>
 
       <div className="header_nav">
         <div className="header_option">
-            <span className="header_optionLineOne">
-                hello Aseel
-            </span>
-            <span className="header_optionLineOne">
-                Sign In
-            </span>
-         
+          <span className="header_optionLineOne">hello Aseel</span>
+          <span className="header_optionLineTwo">Sign In</span>
         </div>
 
         <div className="header_option">
-        <span className="header_optionLineOne">
-               Returns
-            </span>
-            <span className="header_optionLineOne">
-                Orders
-            </span>
+          <span className="header_optionLineOne">Returns</span>
+          <span className="header_optionLineTwo">& Orders</span>
         </div>
 
         <div className="header_option">
-        <span className="header_optionLineOne">
-                Your
-            </span>
-            <span className="header_optionLineOne">
-                Prime
-            </span>
+          <span className="header_optionLineOne">Your</span>
+          <span className="header_optionLineTwo">Prime</span>
         </div>
-        <div className="header_option"></div>
-
+        <div className="header_optionBasket">
+           <ShoppingBasketIcon />
+           <span className="header_optionLineTwo header_basketCount">
+             0
+           </span>
+        </div>
       </div>
     </div>
   );
