@@ -1,49 +1,21 @@
+// 
 import React from "react";
-import './Header.css';
-function Header()
-{
-return (
-    <>
- 
+import './Header.css'
+function Header(){
+return(
+<>
+<nav>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
 
-    <div className="header">
-      <img
-        className="header_logo"
-        src="https://preview.colorlib.com/theme/capitalshop/assets/img/logo/logo.png.webp"
-        alt="amazon"
-      />
 
-      {/* <div className="header_search">
-        <input className="header_searchInput" type="text" />
-        <SearchIcon className="header_searchIcon" />
-      </div> */}
 
-      <div className="header_nav">
-        <div className="header_option">
-          <span className="header_optionLineOne">Home</span>
-       
-        </div>
-
-        <div className="header_option">
-          <span className="header_optionLineOne">Shop</span>
-        </div>
-
-        <div className="header_option">
-          <span className="header_optionLineOne">Blog</span>
-         
-        </div>
-        <div className="header_option">
-          <span className="header_optionLineOne">Contact</span>
-        </div>
-        <div className="header_optionBasket">
-      
-           {/* <span className="header_optionLineTwo header_basketCount">
-             0
-           </span> */}
-        </div>
-      </div>
-    </div>
-    </>
+</>
 );
 }
-export default Header;
+export default Header
