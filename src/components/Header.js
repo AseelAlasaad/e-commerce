@@ -62,7 +62,7 @@ function Header() {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>LAMA.</Logo>
+          <Logo>SHOP.</Logo>
         </Center>
         <Right>
           <MenuItem>REGISTER</MenuItem>
