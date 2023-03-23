@@ -1,6 +1,7 @@
 
 import React from 'react'
 import Announcement from './Announcement'
+import Categories from './Categories'
 import Header from './Header'
 import Slider from './Slider'
 
@@ -10,6 +11,7 @@ function Home() {
         <Announcement/>
        <Header/>
        <Slider/>
+       <Categories/>
     </div>
   )
 }
