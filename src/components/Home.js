@@ -3,6 +3,7 @@ import React from 'react'
 import Announcement from './Announcement'
 import Categories from './Categories'
 import Header from './Header'
+import Products from './Products'
 import Slider from './Slider'
 
 function Home() {
@@ -12,6 +13,7 @@ function Home() {
        <Header/>
        <Slider/>
        <Categories/>
+       <Products/>
     </div>
   )
 }
