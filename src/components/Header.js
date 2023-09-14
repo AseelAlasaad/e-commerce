@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Search } from "@mui/icons-material";
 import { Badge } from "@mui/material";
+import { Link } from "react-router-dom";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 const Container = styled.div`
   height: 60px;
@@ -65,8 +66,13 @@ function Header() {
           <Logo>SHOP.</Logo>
         </Center>
         <Right>
+    
           <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+
+
+   
+        <MenuItem>SIGN IN</MenuItem>
+    
 
           <MenuItem>
             <Badge badgeContent={4} color="primary">

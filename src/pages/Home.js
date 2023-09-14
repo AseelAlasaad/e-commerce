@@ -7,9 +7,11 @@ import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
 
+
 const Home = () => {
   return (
     <div>
+
       <Announcement />
       <Header />
       <Slider />
