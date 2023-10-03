@@ -158,16 +158,8 @@ const Cart = () => {
   const {getProductbyId,cart,itemIncart}=useContext(productContext)
   const [selectedproduct, setselectedproduct]=useState({})
 
-const getId=()=>{
-  cart.map(item=>{
-    const id=item.products[0].productId
-   
-    console.log('cart from cart',id);
-    
-  })
-}
 
-getId()
+
   return (
     <Container>
       {/* <Header /> */}

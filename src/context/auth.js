@@ -18,7 +18,7 @@ export default function AuthProvider(props) {
     cookie.remove("auth");
   };
 
-  const handelSignup = async (e) => {
+  const handelSignup =  (e) => {
     e.preventDefault();
     const data = {
       username: e.target.username.value,
@@ -26,11 +26,12 @@ export default function AuthProvider(props) {
       email: e.target.email.value,
     };
 
-    await axios
+     axios
       .post("http://localhost:5000/signup", data)
       .then((res) => {
         setLoggedin(true);
         console.log("sign up res:", res);
+     
       })
       .catch((e) => console.log(e));
   };
@@ -59,8 +60,8 @@ export default function AuthProvider(props) {
       setuser(userRes.data);
       setusername(userRes.data.username);
       sethasuser(true)
+      cookie.save("user", userRes.data);
       vaildToken(userRes.data.token);
-      // console.log(userRes);
     } catch (error) {
       console.log(error);
     }
@@ -71,6 +72,7 @@ export default function AuthProvider(props) {
       if (validtoken) {
         setLoggedin(true);
         cookie.save("auth", token);
+      
       } else {
         setLoggedin(false);
         setuser({});

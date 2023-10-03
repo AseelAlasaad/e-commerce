@@ -19,7 +19,8 @@ function App() {
   useEffect(()=>{
 
     const lodedtoken=cookie.load('auth')
-    console.log(lodedtoken);
+    const userload=cookie.load('user')
+    // console.log('cookei',userload);
     vaildToken(lodedtoken)
 
     getProduct()

@@ -73,7 +73,7 @@ function Product({ item }) {
 
   
  const {id}=useParams()
-  // const {detailHandle}=useContext(productContext)
+  const {addToCart}=useContext(productContext)
   //  console.log('url=======>',`http://localhost:5000/Product/${id}`);
   const [items, setItem] = useState(null);
   useEffect(() => {
@@ -83,7 +83,7 @@ function Product({ item }) {
         try {
           const response = await axios.get(`http://localhost:5000/Product/${id}`);
           const itemData = response.data;
-          console.log('itemData',itemData);
+          // console.log('itemData',itemData);
           setItem(itemData);
         } catch (error) {
           console.error(error);
@@ -99,7 +99,7 @@ function Product({ item }) {
     
   }, [id]);
 
-console.log(item);
+// console.log(item._id);
 
   return (
 
@@ -110,8 +110,8 @@ console.log(item);
       <Info>
         <Icon>
            <Link to='/cart'>
-
-          <ShoppingCartOutlined/>
+           
+          <ShoppingCartOutlined  onClick={addToCart(item._id)}/>
           </Link>
         </Icon>
         <Icon>
