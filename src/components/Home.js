@@ -10,7 +10,6 @@ function Home() {
   return (
     <div>
       <Announcement/>
-       {/* <Header/> */}
        <Slider/>
        <Categories/>
        <Products/>
