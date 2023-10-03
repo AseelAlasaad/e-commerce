@@ -1,5 +1,10 @@
 import styled from "styled-components";
 import {mobile} from "../responsive";
+import React ,{useContext} from "react";
+import { authContext } from "../context/auth";
+
+import { Link } from 'react-router-dom';
+import Register from "./Register";
 
 const Container = styled.div`
   width: 100vw;
@@ -50,7 +55,7 @@ const Button = styled.button`
   margin-bottom: 10px;
 `;
 
-const Link = styled.a`
+const Linka = styled.div`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -58,20 +63,41 @@ const Link = styled.a`
 `;
 
 const Login = () => {
+  const {login,loggedIn,hasuser}=useContext(authContext)
+
+  console.log(loggedIn);
   return (
-    <Container>
-      <Wrapper>
-        <Title>SIGN IN</Title>
-        <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
-          <Button>LOGIN</Button>
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
-        </Form>
-      </Wrapper>
-    </Container>
-  );
+<Container>
+        <Wrapper>
+          <Title>SIGN IN</Title>
+          <Form onSubmit={login}>
+          <Input placeholder="username" name="username" />
+          <Input placeholder="password" name="password"/>
+            <Button  >LOGIN</Button>
+            <Linka>DO NOT YOU REMEMBER THE PASSWORD?</Linka>
+           <Link  style={{
+              color:'black',
+              textDecoration: 'none',
+           
+            
+          }} to='/register' > <Linka> CREATE A NEW ACCOUNT </Linka></Link>
+         
+   
+   
+       
+          </Form>
+        </Wrapper>
+      </Container>
+
+    
+      // hasuser?(
+        
+      // ) : (
+      //   <Register/>
+      // )
+
+  
+  )
 };
 
 export default Login;

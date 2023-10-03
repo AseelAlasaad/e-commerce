@@ -6,14 +6,12 @@ import Header from "../components/Header";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
-
-
 const Home = () => {
   return (
     <div>
 
       <Announcement />
-      <Header />
+      {/* <Header /> */}
       <Slider />
       <Categories />
       <Products/>

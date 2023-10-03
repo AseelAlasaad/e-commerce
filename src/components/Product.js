@@ -3,9 +3,13 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@mui/icons-material";
-import React from "react";
+import React,{useContext,useState,useEffect} from "react";
 import styled from "styled-components";
-
+import {Routes, Route,useNavigate} from 'react-router-dom'
+import ProductInfo from "./ProductInfo";
+import { Link,useParams } from "react-router-dom";
+import axios from "axios";
+import { productContext } from "../context/product";
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -66,22 +70,65 @@ const Icon = styled.div`
   }
 `;
 function Product({ item }) {
+
+  
+ const {id}=useParams()
+  // const {detailHandle}=useContext(productContext)
+  //  console.log('url=======>',`http://localhost:5000/Product/${id}`);
+  const [items, setItem] = useState(null);
+  useEffect(() => {
+  
+    async function fetchItem() {
+      if(id){
+        try {
+          const response = await axios.get(`http://localhost:5000/Product/${id}`);
+          const itemData = response.data;
+          console.log('itemData',itemData);
+          setItem(itemData);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+     
+   
+    }
+ 
+      
+      fetchItem();
+
+    
+  }, [id]);
+
+
+
   return (
+
+  
+  
     <Container>
       <Circle />
       <Image src={item.img} />
       <Info>
         <Icon>
-          <ShoppingCartOutlined />
+           <Link to='/cart'>
+
+          <ShoppingCartOutlined/>
+          </Link>
         </Icon>
         <Icon>
-          <SearchOutlined />
+          
+          <Link to={`/product/${item._id}`} productfav={items}>
+          <SearchOutlined/>
+          </Link>
         </Icon>
         <Icon>
           <FavoriteBorderOutlined />
         </Icon>
       </Info>
     </Container>
+   
+    
+  
   );
 }
 

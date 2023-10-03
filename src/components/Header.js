@@ -1,9 +1,11 @@
-import React from "react";
+import React,{useContext} from "react";
 import styled from "styled-components";
 import { Search } from "@mui/icons-material";
 import { Badge } from "@mui/material";
-import { Link } from "react-router-dom";
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { Link } from 'react-router-dom';
+import { authContext } from '../context/auth'
+import { productContext } from "../context/product";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 const Container = styled.div`
   height: 60px;
 `;
@@ -41,8 +43,8 @@ const Logo = styled.h1`
 `;
 const Right = styled.div`
   flex: 1;
-  display:felx;
-  align-items:center;
+  display: felx;
+  align-items: center;
   justify-content: flex-end;
 `;
 
@@ -52,6 +54,9 @@ const MenuItem = styled.div`
   margin-left: 25px;
 `;
 function Header() {
+
+  const {loggedIn,logout}=useContext(authContext)
+  const {cart}=useContext(productContext)
   return (
     <Container>
       <Wrapper>
@@ -63,21 +68,66 @@ function Header() {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>SHOP.</Logo>
+          <Link style={{
+             color:'black',
+             textDecoration: 'none',
+          
+           
+         }} to='/'>
+          <Logo>
+            SHOP.
+          </Logo>
+          </Link>
         </Center>
         <Right>
-    
-          <MenuItem>REGISTER</MenuItem>
+          {/* <MenuItem>REGISTER</MenuItem> */}
+          {
+           !loggedIn&&(
+           
+            <MenuItem>  <Link   style={{
+              color:'black',
+              textDecoration: 'none',
+           
+            
+          }} to="/register"> REGISTER   </Link></MenuItem>
+        
 
+           )
+          }
+     {
+           !loggedIn&&(
+          
+            <MenuItem>  <Link style={{
+              color:'black',
+              textDecoration: 'none',
+           
+            
+          }} to="/Login"> SIGN IN   </Link></MenuItem>
 
-   
-        <MenuItem>SIGN IN</MenuItem>
-    
+           )
+          }
+
+{
+           loggedIn&&(
+            <Link to="/Login">
+            <MenuItem onClick={logout}>LOG OUT</MenuItem>
+          </Link>
+
+           )
+          }
+
+            
 
           <MenuItem>
-            <Badge badgeContent={4} color="primary">
-              <ShoppingCartOutlinedIcon />
-            </Badge>
+          <Link style={{
+              color:'black',
+              textDecoration: 'none',
+           
+            
+          }} to="/cart"> <Badge badgeContent={cart.length} color="primary">
+          <ShoppingCartOutlinedIcon />
+        </Badge>  </Link>
+            
           </MenuItem>
         </Right>
       </Wrapper>
