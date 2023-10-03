@@ -99,11 +99,10 @@ function Product({ item }) {
     
   }, [id]);
 
-
+console.log(item);
 
   return (
 
-  
   
     <Container>
       <Circle />
