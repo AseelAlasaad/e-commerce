@@ -99,7 +99,7 @@ function Product({ item }) {
     
   }, [id]);
 
-// console.log(item._id);
+// console.log('product id',id);
 
   return (
 
@@ -111,7 +111,7 @@ function Product({ item }) {
         <Icon>
            <Link to='/cart'>
            
-          <ShoppingCartOutlined  onClick={addToCart(item._id)}/>
+          <ShoppingCartOutlined onClick={()=>addToCart(item)} />
           </Link>
         </Icon>
         <Icon>
