@@ -141,15 +141,7 @@ function Header() {
         </Badge>  </Link>
           )
          }
-{/*  
-          <Link style={{
-              color:'black',
-              textDecoration: 'none',
-           
-            
-          }} to="/cart"> <Badge badgeContent={cart.length} color="primary">
-          <ShoppingCartOutlinedIcon />
-        </Badge>  </Link> */}
+
 
   
 

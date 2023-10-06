@@ -10,7 +10,7 @@ export default function ProductProvider(props) {
   const [cart, setCart] = useState([]);
   const [items, setproductfav] = useState([]);
   const [itemIncart, setItemincart] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(1);
   const [quantity, setquantity] = useState(1);
   const [wishlist,setWishlist]=useState([])
 
@@ -53,57 +53,62 @@ export default function ProductProvider(props) {
     
   }
  // add product in cart
-  const addToCart = (product) => {
-    const usertoken=cookie.load('auth')
-    const headers = {
-      'Authorization': `Bearer ${usertoken}`,
-      'Content-Type': 'application/json', // Set the content type for JSON data
-    };
+  // const addToCart = (product) => {
+  //   const usertoken=cookie.load('auth')
+  //   const headers = {
+  //     'Authorization': `Bearer ${usertoken}`,
+  //     'Content-Type': 'application/json', // Set the content type for JSON data
+  //   };
   
-    console.log(usertoken);
-    const obj = {
-      userId: userload._id,
-      productId: product._id,
-      quantity: quantity,
-    };
-    //  console.log('obj quantity',obj.quantity);
-    const result = !checkCart(product._id);
-    if (result) {
-
-      axios
-        .post("http://localhost:5000/Cart", obj,{headers})
-        .then((res) => {
-          setCart(res.data);
-          setquantity(()=>quantity+1)
-        })
-        .catch((error) => console.log(error));
-
-        setquantity(1);
-    } 
-
-    else {
-     console.log('item exist ');
-
-      //update the quantity in db
-      // const itemToUpdate = cart.find(item => item.productId);
-      //  console.log(itemToUpdate);
- 
-      // const updatedObj = {
-      //   userId: userload._id,
-      //   productId: product._id,
-      //   quantity:quantity+1, 
-      // };
-      // // console.log(updatedObj);
-      // axios
-      //   .put(`http://localhost:5000/Cart/${product._id}`,updatedObj )
-      //   .then((res) => {
-      //     console.log(res);
-      //     // setCart(res.data)
-      //   })
-      //   .catch((error) => console.log(error));
-    }
+  //   console.log(usertoken);
   
-  }
+  //   const obj = {
+  //     userId: userload._id,
+  //     productId: product._id,
+  //     quantity: 1,
+  //   };
+  //   // console.log(quantity);
+  //   //  console.log('obj quantity',obj.quantity);
+  //   const result = checkCart(product._id);
+  //   if (result) {
+  //     setCart([...cart, obj]); 
+  //     axios
+  //       .post("http://localhost:5000/Cart", obj,{headers})
+  //       .then((res) => {
+  //         setCart(res.data);
+  //         setquantity(()=>quantity+1)
+  //       })
+  //       .catch((error) => console.log(error));
+
+    
+  //   } 
+  //     // update the quantity in db
+
+  //   else {
+  //    console.log('item exist ');
+
+  //     const itemToUpdate = cart.find(item => item.productId);
+  //     console.log(itemToUpdate);
+  //     itemToUpdate.quantity +=1;
+  //     console.log( itemToUpdate.quantity );
+
+  //       setCart([...cart])
+  //     const updatedObj = {
+  //       userId: userload._id,
+  //       productId: product._id,
+  //       quantity:quantity, 
+  //     };
+  //     // console.log(updatedObj);
+  //     axios
+  //       .put(`http://localhost:5000/Cart/${product._id}`,itemToUpdate )
+  //       .then((res) => {
+  //         console.log(res);
+  //         // setCart(res.data)
+  //       })
+  //       .catch((error) => console.log(error));
+  //   }
+  
+  // }
 
 
   const getCart = () => {
@@ -127,6 +132,48 @@ export default function ProductProvider(props) {
       .catch((e) => console.log(e));
 
 
+  };
+
+
+  const addToCart = (product) => {
+    const existingItem = cart.find(item => item.productId === product._id);
+
+    // console.log(existingItem);
+    if (existingItem) {
+
+      // If the item exists, increment its quantity in the cart state
+      existingItem.quantity += 1;
+      // console.log(existingItem.quantity);
+      setCart([...cart]); // Trigger a re-render
+      //  console.log(existingItem);
+      // Send an Axios PUT request to update the quantity in the database
+      console.log(existingItem._id);
+      axios.put(`http://localhost:5000/cart/${existingItem._id}`, existingItem) // Replace with your API endpoint
+        .then((response) => {
+          console.log('Item quantity updated in the database:', response.data);
+        })
+        .catch((error) => {
+          console.error('Error updating item quantity in the database:', error);
+        });
+    } else {
+      // If the item doesn't exist, create a new entry with quantity 1 in the cart state
+      const newItem = {
+      userId: userload._id,
+      productId: product._id,
+      quantity: 1,
+    };
+    
+      setCart([...cart, newItem]); // Trigger a re-render
+
+      // Send an Axios POST request to add the item to the database
+      axios.post('http://localhost:5000/cart', newItem) // Replace with your API endpoint
+        .then((response) => {
+          console.log('Item added to the database:', response.data);
+        })
+        .catch((error) => {
+          console.error('Error adding item to the database:', error);
+        });
+    }
   };
   useEffect(() => {
     getCart();
