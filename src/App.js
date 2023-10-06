@@ -12,6 +12,7 @@ import cookie from "react-cookies";
 import {productContext} from './context/product'
 import { When } from 'react-if';
 import ProductInfo from './components/ProductInfo';
+import Wishlist from './pages/Wishlist';
 function App() {
 
   const {vaildToken, loggedIn}=useContext(authContext)
@@ -45,8 +46,9 @@ function App() {
       <Route exact path="/Login" element={<Login/>}/>
       <Route  exact path='/product/:id' element={<ProductInfo/>}/>
       <Route  exact path='/cart' element={<Cart/>}/>
+      <Route  exact path='/Wishlist' element={<Wishlist/>}/>
 
-   
+  
     </Routes>
     </div>
   );

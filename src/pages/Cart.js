@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { mobile } from "../responsive";
 import React,{useEffect,useContext,useState} from 'react';
 import { productContext } from '../context/product';
+import { Link } from "react-router-dom";
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -155,9 +156,11 @@ const Button = styled.button`
 
 const Cart = () => {
 
-  const {getProductbyId,cart,itemIncart,product}=useContext(productContext)
+  const {getProductbyId,cart,itemIncart,product,wishlist}=useContext(productContext)
   const [selectedproduct, setselectedproduct]=useState({})
   const [cartItems, setCartItems] = useState([]);
+  const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) ;
+
 
   useEffect(() => {
    
@@ -172,11 +175,7 @@ const Cart = () => {
     setCartItems(updatedCartItems);
   }, [cart]);
 
-  cartItems.map(item=>{
 
-   console.log(item);
-
- })
 
   return (
     <Container>
@@ -185,15 +184,22 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+        <Link to={`/`}>
+        <TopButton>CONTINUE SHOPPING</TopButton>
+
+          </Link>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <TopText>Shopping Bag({cart.length})</TopText>
+            <Link to={`/Wishlist`}>
+          <TopText>Your Wishlist ({storedWishlist.length})</TopText>
+
+          </Link>
           </TopTexts>
+         
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
-          <Info>
+          <Info> 
             {
 
               cartItems && cartItems.map(item=>

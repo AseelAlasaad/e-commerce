@@ -12,7 +12,7 @@ export default function ProductProvider(props) {
   const [itemIncart, setItemincart] = useState([]);
   const [total, setTotal] = useState(0);
   const [quantity, setquantity] = useState(1);
-
+  const [wishlist,setWishlist]=useState([])
 
   const userload = cookie.load("user");
 
@@ -28,13 +28,39 @@ export default function ProductProvider(props) {
   };
 
 
+
   const checkCart = (productId) => {
     console.log("pid", productId);
     return cart.some((item) => item.productId === productId);
   };
 
+// handle Whishlist 
+
+  const handleWhishlist=(product)=>{
+    const storedWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    let result= storedWishlist.some((item) => item._id === product._id);
+    console.log(result);
+     if(!result)
+     {
+
+      console.log(product);
+       const wish=[...storedWishlist,product]
+      localStorage.setItem('wishlist', JSON.stringify(wish));
+      setWishlist([...wishlist,product])
+     }
+     
+    else console.log('item exist');
+    
+  }
  // add product in cart
   const addToCart = (product) => {
+    const usertoken=cookie.load('auth')
+    const headers = {
+      'Authorization': `Bearer ${usertoken}`,
+      'Content-Type': 'application/json', // Set the content type for JSON data
+    };
+  
+    console.log(usertoken);
     const obj = {
       userId: userload._id,
       productId: product._id,
@@ -45,7 +71,7 @@ export default function ProductProvider(props) {
     if (result) {
 
       axios
-        .post("http://localhost:5000/Cart", obj)
+        .post("http://localhost:5000/Cart", obj,{headers})
         .then((res) => {
           setCart(res.data);
           setquantity(()=>quantity+1)
@@ -115,7 +141,9 @@ export default function ProductProvider(props) {
     cart,
     addToCart,
     itemIncart,
-    getProductbyId
+    getProductbyId,
+    handleWhishlist,
+    wishlist
     
   };
   return (

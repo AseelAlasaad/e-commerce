@@ -73,11 +73,12 @@ function Product({ item }) {
 
   
  const {id}=useParams()
-  const {addToCart}=useContext(productContext)
+  const {addToCart,handleWhishlist}=useContext(productContext)
   //  console.log('url=======>',`http://localhost:5000/Product/${id}`);
+
   const [items, setItem] = useState(null);
   useEffect(() => {
-  
+
     async function fetchItem() {
       if(id){
         try {
@@ -111,7 +112,7 @@ function Product({ item }) {
         <Icon>
            <Link to='/cart'>
            
-          <ShoppingCartOutlined onClick={()=>addToCart(item)} />
+          <ShoppingCartOutlined productfav={items} />
           </Link>
         </Icon>
         <Icon>
@@ -121,7 +122,7 @@ function Product({ item }) {
           </Link>
         </Icon>
         <Icon>
-          <FavoriteBorderOutlined />
+          <FavoriteBorderOutlined onClick={()=>handleWhishlist(item)}/>
         </Icon>
       </Info>
     </Container>

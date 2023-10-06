@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { authContext } from '../context/auth'
 import { productContext } from "../context/product";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { When } from "react-if";
 const Container = styled.div`
   height: 60px;
 `;
@@ -119,7 +120,9 @@ function Header() {
             
 
           <MenuItem>
-          <Link style={{
+         {
+          loggedIn?(
+            <Link style={{
               color:'black',
               textDecoration: 'none',
            
@@ -127,6 +130,30 @@ function Header() {
           }} to="/cart"> <Badge badgeContent={cart.length} color="primary">
           <ShoppingCartOutlinedIcon />
         </Badge>  </Link>
+          ):(
+            <Link style={{
+              color:'black',
+              textDecoration: 'none',
+           
+            
+          }} to="/register"> <Badge badgeContent={3} color="primary">
+          <ShoppingCartOutlinedIcon />
+        </Badge>  </Link>
+          )
+         }
+{/*  
+          <Link style={{
+              color:'black',
+              textDecoration: 'none',
+           
+            
+          }} to="/cart"> <Badge badgeContent={cart.length} color="primary">
+          <ShoppingCartOutlinedIcon />
+        </Badge>  </Link> */}
+
+  
+
+     
             
           </MenuItem>
         </Right>

@@ -29,7 +29,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 function ProductInfo() {
-  const { setproductfav, items } = useContext(productContext);
+  const { setproductfav, items,addToCart } = useContext(productContext);
 
   const { id } = useParams();
   useEffect(() => {
@@ -134,7 +134,7 @@ function ProductInfo() {
             </Wrap>
 
 
-            <Button variant="solid" colorScheme=" white" color={'black'} 
+            <Button  onClick={()=>addToCart(items)} variant="solid" colorScheme=" white" color={'black'} 
            borderColor='gray'
            border={'1px'}
             >
