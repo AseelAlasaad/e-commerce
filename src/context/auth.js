@@ -27,7 +27,7 @@ export default function AuthProvider(props) {
     };
 
      axios
-      .post("http://localhost:5000/signup", data)
+      .post("https://servermangodb.onrender.com/signup", data)
       .then((res) => {
         setLoggedin(true);
         console.log("sign up res:", res);
@@ -45,7 +45,7 @@ export default function AuthProvider(props) {
     console.log("user Res", data);
     try {
       const userRes = await axios.post(
-        "http://localhost:5000/signin",
+        "https://servermangodb.onrender.com/signin",
         {},
         {
           headers: {
