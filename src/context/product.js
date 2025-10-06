@@ -19,7 +19,7 @@ export default function ProductProvider(props) {
   // get product
   const getProduct = async () => {
     await axios
-      .get("http://localhost:5000/Product")
+      .get("https://servermangodb.onrender.com/Product")
       .then((res) => {
         // console.log('product',res.data);
         setproduct(res.data);
@@ -52,68 +52,12 @@ export default function ProductProvider(props) {
     else console.log('item exist');
     
   }
- // add product in cart
-  // const addToCart = (product) => {
-  //   const usertoken=cookie.load('auth')
-  //   const headers = {
-  //     'Authorization': `Bearer ${usertoken}`,
-  //     'Content-Type': 'application/json', // Set the content type for JSON data
-  //   };
-  
-  //   console.log(usertoken);
-  
-  //   const obj = {
-  //     userId: userload._id,
-  //     productId: product._id,
-  //     quantity: 1,
-  //   };
-  //   // console.log(quantity);
-  //   //  console.log('obj quantity',obj.quantity);
-  //   const result = checkCart(product._id);
-  //   if (result) {
-  //     setCart([...cart, obj]); 
-  //     axios
-  //       .post("http://localhost:5000/Cart", obj,{headers})
-  //       .then((res) => {
-  //         setCart(res.data);
-  //         setquantity(()=>quantity+1)
-  //       })
-  //       .catch((error) => console.log(error));
 
-    
-  //   } 
-  //     // update the quantity in db
-
-  //   else {
-  //    console.log('item exist ');
-
-  //     const itemToUpdate = cart.find(item => item.productId);
-  //     console.log(itemToUpdate);
-  //     itemToUpdate.quantity +=1;
-  //     console.log( itemToUpdate.quantity );
-
-  //       setCart([...cart])
-  //     const updatedObj = {
-  //       userId: userload._id,
-  //       productId: product._id,
-  //       quantity:quantity, 
-  //     };
-  //     // console.log(updatedObj);
-  //     axios
-  //       .put(`http://localhost:5000/Cart/${product._id}`,itemToUpdate )
-  //       .then((res) => {
-  //         console.log(res);
-  //         // setCart(res.data)
-  //       })
-  //       .catch((error) => console.log(error));
-  //   }
-  
-  // }
 
 
   const getCart = () => {
     axios
-      .get("http://localhost:5000/Cart")
+      .get("https://servermangodb.onrender.com/Cart")
       .then((res) => {
         // console.log('product in cart=>>>>>',res.data);
         setCart(res.data);
@@ -123,7 +67,7 @@ export default function ProductProvider(props) {
 
   const getProductbyId = (id) => {
 
-    axios.get(`http://localhost:5000/Product/${id}`)
+    axios.get(`https://servermangodb.onrender.com/Product/${id}`)
       .then((res) => {
       
    
@@ -148,7 +92,7 @@ export default function ProductProvider(props) {
       //  console.log(existingItem);
       // Send an Axios PUT request to update the quantity in the database
       console.log(existingItem._id);
-      axios.put(`http://localhost:5000/cart/${existingItem._id}`, existingItem) // Replace with your API endpoint
+      axios.put(`https://servermangodb.onrender.com/cart/${existingItem._id}`, existingItem) // Replace with your API endpoint
         .then((response) => {
           console.log('Item quantity updated in the database:', response.data);
         })
@@ -166,7 +110,7 @@ export default function ProductProvider(props) {
       setCart([...cart, newItem]); // Trigger a re-render
 
       // Send an Axios POST request to add the item to the database
-      axios.post('http://localhost:5000/cart', newItem) // Replace with your API endpoint
+      axios.post('https://servermangodb.onrender.com/cart', newItem) // Replace with your API endpoint
         .then((response) => {
           console.log('Item added to the database:', response.data);
         })
