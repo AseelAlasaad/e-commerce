@@ -35,7 +35,7 @@ function ProductInfo() {
   useEffect(() => {
     const detailHandle = async () => {
       await axios
-        .get(`http://localhost:5000/Product/${id}`)
+        .get(`https://servermangodb.onrender.com/Product/${id}`)
         .then((res) => {
           setproductfav(res.data);
         })
