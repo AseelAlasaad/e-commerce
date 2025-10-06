@@ -82,7 +82,7 @@ function Product({ item }) {
     async function fetchItem() {
       if(id){
         try {
-          const response = await axios.get(`http://localhost:5000/Product/${id}`);
+          const response = await axios.get(`https://servermangodb.onrender.com/Product/${id}`);
           const itemData = response.data;
           // console.log('itemData',itemData);
           setItem(itemData);
